@@ -38,24 +38,26 @@ public class Main {
 
     // Sort
     List<Person> sorted = people.stream()
-        .sorted(Comparator.comparing(Person::getAge).thenComparing(Person::getGender).reversed())
+        .sorted(Comparator.comparing(Person::getAge) //First compare age
+                .thenComparing(Person::getGender) //Second compare gender
+                .reversed()) //Sorted reversed
         .collect(Collectors.toList());
 
 //    sorted.forEach(System.out::println);
 
     // All match
     boolean allMatch = people.stream()
-        .allMatch(person -> person.getAge() > 8);
+        .allMatch(person -> person.getAge() > 8); //Every people, age>8
 
 //    System.out.println(allMatch);
     // Any match
     boolean anyMatch = people.stream()
-        .anyMatch(person -> person.getAge() > 121);
+        .anyMatch(person -> person.getAge() > 121); //Every people, age >121
 
 //    System.out.println(anyMatch);
     // None match
     boolean noneMatch = people.stream()
-        .noneMatch(person -> person.getName().equals("Antonio"));
+        .noneMatch(person -> person.getName().equals("Antonio")); //No name equals Antonio
 
 //    System.out.println(noneMatch);
 
