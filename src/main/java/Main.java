@@ -63,30 +63,37 @@ public class Main {
 
     // Max
     people.stream()
-        .max(Comparator.comparing(Person::getAge));
-//        .ifPresent(System.out::println);
+        .max(Comparator.comparing(Person::getAge))
+        .ifPresent(System.out::println);//if there is a max, print it
 
     // Min
     people.stream()
-        .min(Comparator.comparing(Person::getAge));
-//        .ifPresent(System.out::println);
+        .min(Comparator.comparing(Person::getAge))
+        .ifPresent(System.out::println);//if there is a min, print it
 
     // Group
     Map<Gender, List<Person>> groupByGender = people.stream()
         .collect(Collectors.groupingBy(Person::getGender));
+    //Now we print every group and the list with people that match
+    groupByGender.forEach((gender, people1) -> {
+     System.out.println(gender);
+     people1.forEach(System.out::println);
+     System.out.println();
+    });
+    //the output is:
+    /*FEMALE
+    Person{name='Alina Smith', age=33, gender=FEMALE}
+    Person{name='Helen White', age=57, gender=FEMALE}
+    Person{name='Anna Cook', age=7, gender=FEMALE}
+    Person{name='Zelda Brown', age=120, gender=FEMALE}
 
-//    groupByGender.forEach((gender, people1) -> {
-//      System.out.println(gender);
-//      people1.forEach(System.out::println);
-//      System.out.println();
-//    });
+    MALE
+    Person{name='Antonio', age=20, gender=MALE}
+    Person{name='Alex Boz', age=14, gender=MALE}
+    Person{name='Jamie Goa', age=99, gender=MALE}
+    */
 
-    Optional<String> oldestFemaleAge = people.stream()
-        .filter(person -> person.getGender().equals(Gender.FEMALE))
-        .max(Comparator.comparing(Person::getAge))
-        .map(Person::getName);
 
-    oldestFemaleAge.ifPresent(System.out::println);
   }
 
   private static List<Person> getPeople() {
